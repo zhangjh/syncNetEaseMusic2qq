@@ -12,8 +12,9 @@ qq音乐由于没有找到合适的api，采用了无头浏览器的方案，模
 
 另外，由于qq音乐的cookie存活期太短，种不成功，无法免登，只能通过加debug断点的方式，手工干预登录。
 
-效果：
-![](https://cdn.nlark.com/yuque/0/2021/gif/106920/1628573718873-ae271e9f-9144-4878-aca1-01c0d68df958.gif)
+效果预览：
+
+![image](https://z3.ax1x.com/2021/08/10/fYosAg.md.gif)
 
 ## 使用方式
 1. 安装chrome
