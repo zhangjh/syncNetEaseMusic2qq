@@ -20,8 +20,7 @@ qq音乐由于没有找到合适的api，采用了无头浏览器的方案，模
 2. [安装chrome selenium驱动chromedriver](https://chromedriver.storage.googleapis.com/index.html)，注意下载的驱动版本要和下载的chrome大版本保持一致
 3. 修改配置文件application.properties，填写网易云音乐登录账号，当前项目是手机登录方式
     即使是其他方式，也可以先转为手机号登录
-4. debug模式启动SyncNetEaseMusic2QqApplication，断点设置在favorite函数内，在selenium打开浏览器后，手动登录一下
-5. 释放断点，让程序自动执行，该程序会将用户第一个歌单的所有歌曲添加到qq音乐"我喜欢"里，如果需要同步其他歌单可以稍微修改一下代码即可
+4. 登录qq音乐后，打开控制台，找到任意请求，从request header中复制出cookie字段，修改application.properties，填入qq.cookies中
 
 ## 注意事项
 1. 当前没有找到qq音乐的api接口，以及免登方法，有好的建议可以交流
