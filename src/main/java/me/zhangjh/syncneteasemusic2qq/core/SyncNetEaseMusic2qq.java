@@ -15,6 +15,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,6 +26,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -95,7 +97,7 @@ public class SyncNetEaseMusic2qq {
         return playList.get(0).getId();
     }
 
-    private static List<String> getPlaylistDetail(Long playListId, RequestConfig config) throws Exception {
+    private List<String> getPlaylistDetail(Long playListId, RequestConfig config) throws Exception {
         List<String> songList = new ArrayList<>();
         HttpGet httpGet = new HttpGet(PLAYLIST_DETAIL_URL_PRE + "?id=" + playListId + "&cookie=" + config.getCookieSpec());
         CloseableHttpResponse playListDetailResp = CLIENT.execute(httpGet);
@@ -113,28 +115,27 @@ public class SyncNetEaseMusic2qq {
     }
 
     @SneakyThrows
-    private static void favorite(List<String> songList) {
+    private void favorite(List<String> songList) {
         // 需要首先安装chromedriver，下载后解压即可
         System.setProperty("webdriver.chrome.driver","/Users/zhangjh/Desktop/chromedriver");
         WebDriver driver = new ChromeDriver();
 
         try {
             driver.get("https://y.qq.com/n/ryqq/search");
-
-//        qq音乐带cookies免登没有生效，先暂时注释，运行时需先打debug断点，手动登录
-//        if(!setCookieFlag) {
-//            String[] cookies = QQ_COOKIE.split(";");
-//            for (String cookie : cookies) {
-//                String[] split = cookie.split("=");
-//                if(split.length != 2) {
-//                    continue;
-//                }
-//                String key = split[0];
-//                String value = split[1];
-//                // 注意不能有空格
-//                driver.manage().addCookie(new Cookie(key.trim(), value.trim()));
-//            }
-//        }
+        // 种cookies免登
+        if(!SET_COOKIE_FLAG) {
+            String[] cookies = qqCookies.split(";");
+            for (String cookie : cookies) {
+                String[] split = cookie.split("=");
+                if(split.length != 2) {
+                    continue;
+                }
+                String key = split[0];
+                String value = split[1];
+                // 注意不能有空格
+                driver.manage().addCookie(new Cookie(key.trim(), value.trim(), ".qq.com", "/", new Date(System.currentTimeMillis() + 3600 * 1000)));
+            }
+        }
             for (String song : songList) {
                 String url = "https://y.qq.com/n/ryqq/search?w=" + URLEncoder.encode(song, "UTF-8") +  "&t=song";
                 driver.get(url);
