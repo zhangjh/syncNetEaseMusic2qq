@@ -14,7 +14,13 @@ qq音乐由于没有找到合适的api，采用了无头浏览器的方案，模
 
 效果预览：
 
-[![fYosAg.gif](https://z3.ax1x.com/2021/08/10/fYosAg.gif)](https://z3.ax1x.com/2021/08/10/fYosAg.gif)
+自动收藏中：
+
+<img src="https://github.com/zhangjh/syncNetEaseMusic2qq/blob/master/VID_20210809_221628.gif" width="600" height="300" />
+
+收藏完成：
+
+<img src="https://z3.ax1x.com/2021/08/10/fYqgOI.md.jpg" alt="fYqgOI.jpg" border="0" height="600" width="300" />
 
 ## 使用方式
 1. 安装chrome
