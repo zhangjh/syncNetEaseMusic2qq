@@ -45,6 +45,9 @@ public class SyncNetEaseMusic2qq {
     @Value("${qq.cookies}")
     private String qqCookies;
 
+    @Value("${chrome.driver.path}")
+    private String chromeDriverPath;
+
     private static final CloseableHttpClient CLIENT = HttpClients.createDefault();
 
     /** 网易云音乐api部署环境 */
@@ -117,7 +120,7 @@ public class SyncNetEaseMusic2qq {
     @SneakyThrows
     private void favorite(List<String> songList) {
         // 需要首先安装chromedriver，下载后解压即可
-        System.setProperty("webdriver.chrome.driver","/Users/zhangjh/Desktop/chromedriver");
+        System.setProperty("webdriver.chrome.driver", chromeDriverPath);
         WebDriver driver = new ChromeDriver();
 
         try {

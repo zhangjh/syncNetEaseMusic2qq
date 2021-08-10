@@ -21,6 +21,7 @@ qq音乐由于没有找到合适的api，采用了无头浏览器的方案，模
 3. 修改配置文件application.properties，填写网易云音乐登录账号，当前项目是手机登录方式
     即使是其他方式，也可以先转为手机号登录
 4. 登录qq音乐后，打开控制台，找到任意请求，从request header中复制出cookie字段，修改application.properties，填入qq.cookies中
+5. 修改配置文件，填写正确的chromedriver的路径
 
 ## 注意事项
 1. 当前没有找到qq音乐的api接口，以及免登方法，有好的建议可以交流
