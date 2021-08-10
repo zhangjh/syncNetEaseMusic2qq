@@ -143,16 +143,16 @@ public class SyncNetEaseMusic2qq {
                 Actions actions = new Actions(driver);
                 actions.sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).perform();
                 actions.sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).perform();
-                Thread.sleep(1000);
+                Thread.sleep(2000);
 
                 // 选择器
                 String firstSongSelector = "#app div.mod_songlist > ul.songlist__list > li:nth-child(1) div.songlist__time";
                 driver.findElement(By.cssSelector(firstSongSelector)).click();
 
-                Thread.sleep(1000);
+                Thread.sleep(2000);
                 String addBtnSelector = "#app div.mod_songlist > ul.songlist__list > li:nth-child(1) div.songlist__songname a.list_menu__item.list_menu__add";
                 driver.findElement(By.cssSelector(addBtnSelector)).click();
-                Thread.sleep(1000);
+                Thread.sleep(2000);
 
                 String add2FavoriteSelector = "#fav_pop ul > li > a.operate_menu__link";
                 driver.findElement(By.cssSelector(add2FavoriteSelector)).click();
