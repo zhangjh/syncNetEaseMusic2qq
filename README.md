@@ -14,7 +14,7 @@ qq音乐由于没有找到合适的api，采用了无头浏览器的方案，模
 
 效果预览：
 
-[![fYosAg.gif](https://z3.ax1x.com/2021/08/10/fYosAg.md.gif)](https://z3.ax1x.com/2021/08/10/fYosAg.md.gif)
+[![fYosAg.gif](https://z3.ax1x.com/2021/08/10/fYosAg.gif)](https://z3.ax1x.com/2021/08/10/fYosAg.gif)
 
 ## 使用方式
 1. 安装chrome
