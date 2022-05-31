@@ -8,6 +8,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -119,7 +120,9 @@ public class PublishApplyTest {
             httpPost.addHeader("x-requested-with", "XMLHttpRequest");
             httpPost.addHeader("x-xsrf-token", "38da3d66-3f97-4713-98ce-12e52354468e");
 
-            httpPost.setEntity(new StringEntity(JSON.toJSONString(param)));
+            StringEntity entity = new StringEntity(JSON.toJSONString(param), StandardCharsets.UTF_8);
+            entity.setContentEncoding("UTF-8");
+            httpPost.setEntity(entity);
             CloseableHttpResponse response = CLIENT.execute(httpPost);
             if(response.getStatusLine().getStatusCode() != 200) {
                 System.out.println("申请失败" + param);
@@ -127,6 +130,17 @@ public class PublishApplyTest {
             System.out.println(EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8));
 
             Thread.sleep(2000);
+        }
+
+        JSONObject cookieJSON = new JSONObject();
+        cookieJSON.put("cookie", COOKIES);
+        HttpPost httpPost = new HttpPost("https://control.superboss.cc/apply/cookie?cookie=XSRF-TOKEN=38da3d66-3f97-4713-98ce" +
+                "-12e52354468e;+cna=ogKDF1dZkBcCAbeGbtOXsdg2;+xlly_s=1;+dingtalk-login=tLdr5NIcXnIiE;+_dd_s=logs=1&id=55e4027f-7dad-43dc-aa66-60a8b186d006&created=1653988660008&expire=1653989712819;+l=eBPtqIsrQqSGO6rMBOfZhurza7799IRAguPzaNbMiOCPO31H5bTFB6X76SYMCnGVh67kJ3rVZW9zBeYBcCXna5XxOp5tPbHmn;+isg=BImJ5lubD62KtM8w2nFARofrmLPj1n0I-C-LWSv-NHCvcqmEcidM2aGstNZEKhVA;+tfstk=c53PButSIyDfb6aBXzaeN_oBvoqRZW3iJtPQqdkEWpth--ZliJBLi6X30l1VKuf..");
+
+        httpPost.setEntity(new StringEntity(JSON.toJSONString(cookieJSON)));
+        CloseableHttpResponse response = CLIENT.execute(httpPost);
+        if(response.getStatusLine().getStatusCode() != 200) {
+            System.out.println("cookie提交失败");
         }
     }
 }
