@@ -125,20 +125,20 @@ public class SyncNetEaseMusic2qq {
 
         try {
             driver.get("https://y.qq.com/n/ryqq/search");
-        // 种cookies免登
-        if(!SET_COOKIE_FLAG) {
-            String[] cookies = qqCookies.split(";");
-            for (String cookie : cookies) {
-                String[] split = cookie.split("=");
-                if(split.length != 2) {
-                    continue;
+            // 种cookies免登
+            if(!SET_COOKIE_FLAG) {
+                String[] cookies = qqCookies.split(";");
+                for (String cookie : cookies) {
+                    String[] split = cookie.split("=");
+                    if(split.length != 2) {
+                        continue;
+                    }
+                    String key = split[0];
+                    String value = split[1];
+                    // 注意不能有空格
+                    driver.manage().addCookie(new Cookie(key.trim(), value.trim(), ".qq.com", "/", new Date(System.currentTimeMillis() + 3600 * 1000)));
                 }
-                String key = split[0];
-                String value = split[1];
-                // 注意不能有空格
-                driver.manage().addCookie(new Cookie(key.trim(), value.trim(), ".qq.com", "/", new Date(System.currentTimeMillis() + 3600 * 1000)));
             }
-        }
             for (String song : songList) {
                 String url = "https://y.qq.com/n/ryqq/search?w=" + URLEncoder.encode(song, "UTF-8") +  "&t=song";
                 driver.get(url);
